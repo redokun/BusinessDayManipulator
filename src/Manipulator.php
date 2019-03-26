@@ -179,7 +179,7 @@ class Manipulator implements ManipulatorInterface
 
         return $this->freeWeekDays;
     }
-    
+
     /**
      * {@inheritdoc}
      */
@@ -188,7 +188,7 @@ class Manipulator implements ManipulatorInterface
         if ($howManyDays < 1) {
             throw new \InvalidArgumentException('The paramter $howManyDays must be greater than 0');
         }
-        
+
         $today = new \DateTime();
 
         if ($today->format('Y-m-d') === $this->cursorDate->format('Y-m-d')) {
@@ -215,7 +215,7 @@ class Manipulator implements ManipulatorInterface
 
         return $this;
     }
-    
+
 
     /**
      * {@inheritdoc}
@@ -225,7 +225,7 @@ class Manipulator implements ManipulatorInterface
         if ($howManyDays < 1) {
             throw new \InvalidArgumentException('The paramter $howManyDays must be greater than 0');
         }
-        
+
         $today = new \DateTime();
 
         if ($today->format('Y-m-d') === $this->cursorDate->format('Y-m-d')) {
@@ -371,7 +371,9 @@ class Manipulator implements ManipulatorInterface
         $dates = [];
 
         if($this->startDate == $this->endDate){
-            $dates[] = clone $this->startDate;
+            if ($this->isBusinessDay($this->startDate)) {
+                $dates[] = clone $this->startDate;
+            }
             return $dates;
         }
 

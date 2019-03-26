@@ -250,6 +250,20 @@ class ManipulatorTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals([$day], $manipulator->getBusinessDaysDate());
     }
 
+    public function testPredicatorWithSameOffDay()
+    {
+        $manipulator = new Manipulator();
+
+        $day = new \DateTime('2015-05-13'); // Holiday
+
+        $manipulator->setStartDate($day);
+        $manipulator->setEndDate($day);
+        $manipulator->addHoliday(new \DateTime('2015-05-13'));
+
+        $this->assertEquals(0, $manipulator->getBusinessDays());
+        $this->assertEquals([], $manipulator->getBusinessDaysDate());
+    }
+
     public function testPredicatorException()
     {
         $this->setExpectedException('LogicException');
