@@ -126,20 +126,30 @@ class ManipulatorTest extends \PHPUnit_Framework_TestCase
     {
         $manipulator = new Manipulator();
 
-        $manipulator->setStartDate(new \DateTime());
+        $date1 = new \DateTime();
+
+        $manipulator->setStartDate($date1);
         $manipulator->addBusinessDays(5);
 
-        $this->assertEquals(new \DateTime('now + 5 days'), $manipulator->getDate());
+        $date2 = clone $date1;
+        $date2->modify('+ 5 days');
+
+        $this->assertEquals($date2, $manipulator->getDate());
     }
 
     public function testSubBusinessDays()
     {
         $manipulator = new Manipulator();
 
-        $manipulator->setStartDate(new \DateTime());
+        $date1 = new \DateTime();
+
+        $manipulator->setStartDate($date1);
         $manipulator->subBusinessDays(5);
 
-        $this->assertEquals(new \DateTime('now - 5 days'), $manipulator->getDate());
+        $date2 = clone $date1;
+        $date2->modify('- 5 days');
+
+        $this->assertEquals($date2, $manipulator->getDate());
     }
 
     public function testIsBusinessDay()
