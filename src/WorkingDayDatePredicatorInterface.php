@@ -14,13 +14,7 @@ interface WorkingDayDatePredicatorInterface
      */
     public function setStartDate(\DateTime $startDate);
 
-    /**
-     * @param int    $howManyDays
-     * @param string $strategy
-     *
-     * @return $this
-     */
-    public function addBusinessDays($howManyDays, $strategy = Manipulator::EXCLUDE_TODAY);
+    public function addBusinessDays(int $howManyDays);
 
     /**
      * @return \DateTime
